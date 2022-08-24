@@ -1,0 +1,124 @@
+<robot name="mycar">
+    <!-- 添加base_footprint -->
+    <link name="base_footprint">
+        <visual>
+            <geometry>
+                <sphere radius=" 0.0001" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="blue">amera2baselink
+                <color rgba="0.8 0 1.0 0.5" />
+            </material>
+        </visual>
+    </link>
+
+    <!-- 底盘 -->
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.1"   length="0.08" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="baselink_color">
+                <color rgba="0.8 0 1.0 0.5" />
+            </material>
+        </visual>
+    </link>
+
+
+    <!-- 驱动轮 -->
+    <link name="left_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.0325"   length="0.015" />
+            </geometry>
+            <origin xyz="0 0  0" rpy="1.5708 0 0" />
+            <material name="whelel_color">
+                <color rgba="0  0  0  0.3" />
+            </material>
+        </visual>
+
+
+
+    </link>
+        <link name="right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.0325"   length="0.015" />
+            </geometry>
+            <origin xyz="0  0  0" rpy="1.5708 0 0" />
+            <material name="whelel_color">
+                <color rgba="0  0  0  0.3" />
+            </material>
+        </visual>
+    </link>
+
+    <link name="front_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.0075" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+    </link>
+
+
+    <link name="back_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.0075" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+    </link>
+
+
+
+        <!-- 关节 -->
+        <joint name="link2footprint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link" />
+        <!-- 需要计算两个 link 的物理中心之间的偏移量 -->
+        <origin xyz="0  0  0.055" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+        </joint>
+
+         <joint name="left2footprint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel" />
+        <!-- 需要计算两个 link 的物理中心之间的偏移量 -->
+        <origin xyz="0  0.1  -0.0225" rpy="0 0 0" />
+        <axis xyz="0   1   0" />
+        </joint>
+
+         <joint name="right2footprint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel" />
+        <!-- 需要计算两个 link 的物理中心之间的偏移量 -->
+        <origin xyz="0  -0.1  -0.0225" rpy="0 0 0" />
+        <axis xyz="0   1   0" />
+        </joint>
+
+
+    <joint name="front_wheel2base_link" type="continuous">
+        <parent link="base_link" />
+        <child link="front_wheel" />
+        <origin xyz="0.08 0 -0.0475" />
+        <axis xyz="1 1 1" />
+    </joint>
+
+        <joint name="back_wheel2base_link" type="continuous">
+        <parent link="base_link" />
+        <child link="back_wheel" />
+        <origin xyz="-0.08 0 -0.0475" />
+        <axis xyz="1 1 1" />
+    </joint> 
+
+</robot>
+
